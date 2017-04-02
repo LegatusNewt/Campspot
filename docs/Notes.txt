@@ -1,0 +1,60 @@
+Campspot Developer Programming Challenge Notes
+Date:	03/28/2017
+
+
+Implement a camping reservation system that utilizes the gap rule.
+
+The gap rule states that a reservation cannot be made if it will leave a specified gap.
+
+Requirements:
+
+Gap size must be configurable
+Output each availible campground following the gap rule
+Must include executable test cases
+Must include a readme file explaining
+	-	how to build and run your program and tests
+	-	high level description of the approach
+	-	any assumptions of considerations made
+
+
+
+	
+High Level Approach
+	Use of GSON library to create java objects out of json
+
+	Objects:
+		Campsite			
+			-	id -int
+			-	name -string		
+		Reservation System
+			Map<int,Reservation[]>
+				-	key : campsite id
+				-	value : Reservation object array
+					-	value : reservation object
+			*	newReservation(Reservation) -public
+			*	checkForGap(id,reservation) -private
+			*	getReservations(id) returns reservation array -public
+			*	printSchedule(id) - prints all reservations at a specific camp site 
+			*	printSchedule() - prints all reservations in date order
+		Reservation			
+			-	startDate (string)
+			-	endDate	(string)
+			
+			
+			
+			
+			
+			
+			
+			
+			
+Command Line operations to build executable jar
+
+From the top project folder
+
+BUILD:
+javac -classpath ./jars/*.jar ./src/*.java -d .
+jar cvfm ReservationSystem.jar manifest.txt com jars
+
+EXECUTE:
+java -jar ReservationSystem.jar
