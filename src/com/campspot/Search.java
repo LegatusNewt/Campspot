@@ -14,7 +14,22 @@ public class Search
 	private String endDate;
 	private LocalDate startDateObject = LocalDate.now();
 	private LocalDate endDateObject = LocalDate.now();
-	
+
+	public Search(LocalDate start, LocalDate end)
+    {
+        startDate = start.toString();
+        endDate = end.toString();
+        startDateObject = start;
+        endDateObject = end;
+    }
+    public Search(String start, String end)
+    {
+        startDate = start;
+        endDate = end;
+        startDateObject = LocalDate.parse(start);
+        endDateObject = LocalDate.parse(end);
+    }
+
 	public Search()
 	{
 	}

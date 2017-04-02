@@ -9,10 +9,14 @@ package com.campspot;
 public class GapRule implements Comparable<GapRule>
 {
 	private int gapSize;
-	
+
+	public GapRule(int i)
+    {
+        gapSize = i;
+    }
 	public GapRule()
 	{
-		
+		gapSize = -1;
 	}
 	public void setGapSize(int gr)
 	{

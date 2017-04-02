@@ -19,11 +19,15 @@ public class Input
 	public List<Reservation> reservations;
 
     /**
-     * Campsites should contain a sorted list of reservations
+     * Campsites should contain a list of reservations
      */
 	public void intializeData()
     {
         ArrayList<Reservation> tempRes;
+
+        //If there are no rules in the json create an empty list of gaprules
+        if(gapRules == null)
+            gapRules = new ArrayList<GapRule>();
 
         for(Campsite c : campsites)
         {

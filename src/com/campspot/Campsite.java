@@ -21,7 +21,8 @@ public class Campsite
 
 	public Campsite()
 	{
-		
+		id = -1;
+		name = "test";
 	}
 	public Campsite(int id, String name)
 	{
@@ -51,14 +52,18 @@ public class Campsite
             Collections.sort(reservations);
             tmpIndex = reservations.indexOf(newReservation);
 
-            if (tmpIndex > 0) {
-                leftRes = reservations.get(tmpIndex - 1);
-                valid = checkRules(leftRes,newReservation,rules);
+            //verify neighbors with gaprules
+            if(!rules.isEmpty()) {
+                if (tmpIndex > 0) {
+                    leftRes = reservations.get(tmpIndex - 1);
+                    valid = checkRules(leftRes, newReservation, rules);
+                }
+                if (tmpIndex < reservations.size() - 1 && valid) {
+                    rightRes = reservations.get(tmpIndex + 1);
+                    valid = checkRules(rightRes, newReservation, rules);
+                }
             }
-            if (tmpIndex < reservations.size() - 1 && valid) {
-                rightRes = reservations.get(tmpIndex + 1);
-                valid = checkRules(rightRes, newReservation,rules);
-            }
+            reservations.remove(newReservation);
         }
         else
         {
@@ -69,7 +74,7 @@ public class Campsite
 
     /**
      * Helper function checkRules, returns true if the reservation is following the gap rules compared
-     * to the reservation its being compared to. Order matters.
+     * to the reservation its being compared to.
      * @param compareRes
      * @param newRes
      * @param rules
@@ -92,14 +97,13 @@ public class Campsite
         tempGap -= 1;
 
         //Loop through gap rules
-        for(GapRule g : rules)
-        {
+        for(GapRule g : rules) {
             //If the gap is bigger than the gap rules allow then remove the reservation
             //validity is now false
-            //
-            if(tempGap == g.getGapSize())
-            {
-                valid = false;
+            if (g.getGapSize() != -1) //make sure the gaprule doesn't have the default value
+            { if (tempGap == g.getGapSize()) {
+                    valid = false;
+                }
             }
         }
         return valid;
